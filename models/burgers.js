@@ -2,10 +2,10 @@
 
 
 module.exports = function(sequelize, DataTypes) {
-  const Burger = sequelize.define("Burger", {
-    burger_Name: {
+  const burgers = sequelize.define("burgers", {
+    burger_name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
@@ -24,5 +24,5 @@ module.exports = function(sequelize, DataTypes) {
   }
   
   );
-  return Burger;
+  return burgers;
 };

@@ -7,10 +7,10 @@ module.exports = function(app) {
 
   // GET route for getting all of the posts
   app.get("/api/burgers", function(req, res) {
-    db.Burger.findAll({})
-      .then(function(Burger) {
-        res.json(Burger);
-        console.log(Burger)
+    db.burgers.findAll({})
+      .then(function(burgers) {
+        res.json(burgers);
+        console.log(burgers)
       });
   });
 
@@ -18,16 +18,35 @@ module.exports = function(app) {
 
 
   // POST route for saving a new post
-  app.post("/add", function(req, res) {
+  app.post("/api/burgers", function(req, res) {
     console.log(req.body);
-    db.Burger.create({
-      burgerName: req.body.title,
+    db.burgers.create({
+      burger_name: req.body.burger_name,
       devoured: false
     })
-      .then(function(dbPost) {
-        res.json(dbPost);
+      .then(function(burgers) {
+        res.json(burgers);
       });
   });
 
   
+
+
+    // PUT route for updating a burger
+  // app.put("/api/burgers/:id", function(req, res) {
+  //   console.log(req.body);
+  //   db.Burger.update({
+  //     devoured: true
+  //   },
+  //   {
+  //     where: {id: req.params.id}
+  //   }
+  //   )
+  //     .then(function(Burger) {
+  //       res.json(Burger);
+  //     });
+  // });
+
+  
+
 };
