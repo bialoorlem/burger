@@ -1,65 +1,31 @@
-const express = require("express");
+//Pulled and modified from: https://github.com/bradtraversy/codegig/blob/master/app.js
 
-const Sequelize = require('sequelize');
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 
-const PORT = process.env.PORT || 8080;
+// Database
+const db = require('./config/connection.js');
+
+// Test DB
+db.authenticate()
+  .then(() => console.log('Database connected...'))
+  .catch(err => console.log('Error: ' + err))
 
 const app = express();
 
-// Option 1: Passing parameters separately
-const sequelize = new Sequelize('burgers_db', 'root', 'root', {
-  port: PORT,
-username: "root",
-password: "root",
-database: "burgers_db",
-    host: "127.0.0.1",
-    "dialect": "mysql",
-    "logging": false
-});
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: false }));
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
+// Index route
+app.get('/', (req, res) => res.render('index', { layout: 'landing' }));
 
-// const express = require("express");
+// Burger routes
+app.use('/burgers.js', require('./models/burgers.js'));
 
-// const db = require("../db");
+const PORT = process.env.PORT || 8080;
 
-// const app = express();
-// const PORT = process.env.PORT || 8080;
-
-// // Middleware
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
-// app.use(express.static("public"));
-
-// // Routes
-// const API = require("./routes/apiRoutes");
-// API.api(app);
-
-// var syncOptions = { force: false };
-
-// // If running a test, set syncOptions.force to true
-// // clearing the `testdb`
-// if (process.env.NODE_ENV === "test") {
-//   syncOptions.force = true;
-// }
-
-// // Starting the server, syncing our models ------------------------------------/
-// db.sequelize.sync(syncOptions).then(function() {
-//   app.listen(PORT, function() {
-//     console.log(
-//       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-//       PORT,
-//       PORT
-//     );
-//   });
-// });
-
-// module.exports = app;
+app.listen(PORT, console.log(`Server started on port ${PORT}`));
