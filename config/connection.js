@@ -1,25 +1,25 @@
-// const mysql = require("mysql")
+const mysql = require("mysql")
 
-// const connection = mysql.createConnection({
-//     host: "localhost",
+const connection = mysql.createConnection({
+    host: "localhost",
 
-//     // Port server
-//     port: 4040,
+    // Port server
+    port: 4040,
 
-//     // Your username
-//     user: "root",
+    // Your username
+    user: "root",
 
-//     // Your password
-//     password: "root",
-//     database: "burgers_db"
-// });
+    // Your password
+    password: "root",
+    database: "burgers_db"
+});
 
-// connection.connect(function (err) {
-//     if (err) throw err;
-//     console.log("connected as id " + connection.threadId);
-// });
+connection.connect(function (err) {
+    if (err) throw err;
+    console.log("connected as id " + connection.threadId);
+});
 
-// module.exports = connection
+
 
 const express = require("express");
 
@@ -31,15 +31,13 @@ const app = express();
 
 //Pulled from Sequelize's documentation
 
+
 const sequelize = new Sequelize('burgers_db', 'root', 'root', {
-  port: PORT,
-username: "root",
-password: "root",
-database: "burgers_db",
-    host: "127.0.0.1",
-    "dialect": "mysql",
-    "logging": false
+  host: "localhost",
+  port: 4040,
+  dialect: "mysql"
 });
+
 
 sequelize
   .authenticate()
@@ -49,3 +47,5 @@ sequelize
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });
+
+  module.exports = connection

@@ -8,9 +8,6 @@ const path = require('path');
 const db = require('./config/connection.js');
 
 // Test DB
-db.authenticate()
-  .then(() => console.log('Database connected...'))
-  .catch(err => console.log('Error: ' + err))
 
 const app = express();
 
