@@ -21,6 +21,7 @@
     "database": "burgers_db",
     "host": "localhost",
     "port": 4040,
+    "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
 }

@@ -1,6 +1,6 @@
 //Worked with Michell on these routes
 
-const db = require("./models");
+const db = require("./models/burgers.js");
 
 
 module.exports = function(app) {
