@@ -1,6 +1,6 @@
 //Worked with Michell on these routes
 
-const db = require("./models");
+const db = require("../models");
 
 
 module.exports = function(app) {

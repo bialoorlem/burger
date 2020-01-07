@@ -2,10 +2,10 @@
   "name": "burger",
   "version": "1.0.0",
   "description": "This app allows the user to input burger types and to devour them",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node burgers.js",
-    "dev": "nodemon burgers.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",

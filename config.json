@@ -4,7 +4,7 @@
     "password": "root",
     "database": "burgers_db",
     "host": "localhost",
-    "port": 4040,
+    "port": 8889,
     "dialect": "mysql"
   },
   "test": {
@@ -12,7 +12,7 @@
     "password": "root",
     "database": "burgers_db",
     "host": "localhost",
-    "port": 4040,
+    "port": 8889,
     "dialect": "mysql"
   },
   "production": {
@@ -20,7 +20,7 @@
     "password": "root",
     "database": "burgers_db",
     "host": "localhost",
-    "port": 4040,
+    "port": 8889,
     "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
