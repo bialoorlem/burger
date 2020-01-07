@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8080;
 
 
 // Database
-const db = require("./models/burgers.js");
+const db = require("./models");
 
 
 
