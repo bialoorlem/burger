@@ -1,15 +1,15 @@
-const Sequelize = require('sequelize');
+//Pulled from Brad Traversy's GitHub and modified: https://github.com/bradtraversy/codegig/blob/master/models/Gig.js
 
-let burger = sequelize.define('burger', {
-  // attributes
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false
+const Sequelize = require('sequelize');
+const db = require('../config/connection.js');
+
+const burger = db.define('burger', {
+  burgerName: {
+    type: Sequelize.STRING
   },
   devoured: {
     type: Sequelize.STRING
-    // allowNull defaults to true
   }
-}, {
-  // options
-});
+})
+
+module.exports = burger;
