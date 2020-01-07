@@ -2,7 +2,7 @@
 
 
 module.exports = function(sequelize, DataTypes) {
-  var Burger = sequelize.define("Burger", {
+  const Burger = sequelize.define("Burger", {
     burgerName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,3 +17,4 @@ module.exports = function(sequelize, DataTypes) {
   });
   return Burger;
 };
+
