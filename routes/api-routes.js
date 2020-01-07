@@ -6,11 +6,11 @@ const db = require("../models");
 module.exports = function(app) {
 
   // GET route for getting all of the posts
-  app.get("/", function(req, res) {
+  app.get("/api/burgers", function(req, res) {
     db.Burger.findAll({})
-      .then(function(dbPost) {
-        res.json(dbPost);
-        console.log(dbPost)
+      .then(function(Burger) {
+        res.json(Burger);
+        console.log(Burger)
       });
   });
 

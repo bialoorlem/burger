@@ -3,7 +3,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   const Burger = sequelize.define("Burger", {
-    burgerName: {
+    burger_Name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -13,7 +13,16 @@ module.exports = function(sequelize, DataTypes) {
     devoured: {
       type: DataTypes.BOOLEAN,
       allowNull: false
-    }
-  });
+    },
+    
+  },
+
+  {
+
+    timestamps: false
+
+  }
+  
+  );
   return Burger;
 };
