@@ -1,5 +1,4 @@
-//Pulled from Brad Traversy's GitHub and modified: https://github.com/bradtraversy/codegig/blob/master/models/Gig.js
-
+//Received help from tutor, Michell
 
 
 module.exports = function(sequelize, DataTypes) {

@@ -1,4 +1,4 @@
-//Pulled and modified from: https://github.com/bradtraversy/codegig/blob/master/app.js
+//Worked with my tutor, Michell, on this
 
 const express = require('express');
 const app = express();
