@@ -1,50 +1,32 @@
-const express = require("express")
-const burgers = require("../models/burger.js")
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const db = require('../config/connection.js');
+const burgerName = require('../models/burgers.js');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
-router.get("/", function (req, res) {
-    console.log("GET")
-    burgers.selectAll(function (data) {
-        console.log(data)
+// Get burger list
+router.get('/', (req, res) => 
+  burgerName.findAll()
+    .then(burgers => res.render('burger', {
+        burgers
+      }))
+    .catch(err => console.log(err)));
 
-        let hbobj = {
-            burger: data
-        }
+// Display add burger form
+router.get('/add', (req, res) => res.render('add'));
 
-        res.render("index", hbobj)
+// Add a burgers
+router.post('/add', (req, res) => {
+  let { name } = req.body;
+  let errors = [];
+
+    // Insert into table
+    burgerName.create({
+      name
     })
-})
+      .then(burgers => res.redirect('/burgers_controller.js'))
+      .catch(err => console.log(err));
+  });
 
-router.post("/burger/create", function (req, res) {
-    console.log("POST", req.body)
-    const burgerName = req.body.burgerName
-    console.log("burgerNmae: ", burgerName)
-    burgers.insertOne(["burger_name"], [burgerName], function (result) {
-        console.log(result)
-        res.json(result)
-    })
-
-
-})
-
-router.put("/burger/update/:ID", function(req,res){
-    console.log("PUT", req.params)
-
-    console.log(req.params)
-
-    burgers.updateOne(req.params.ID,function(data){
-        res.json(data)
-
-    })
-})
-
-
-
-
-
-
-
-
-
-
-module.exports = router
+module.exports = router;
