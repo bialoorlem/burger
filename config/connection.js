@@ -29,7 +29,8 @@ const PORT = process.env.PORT || 8080;
 
 const app = express();
 
-// Option 1: Passing parameters separately
+//Pulled from Sequelize's documentation
+
 const sequelize = new Sequelize('burgers_db', 'root', 'root', {
   port: PORT,
 username: "root",
