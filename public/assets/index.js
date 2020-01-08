@@ -75,20 +75,9 @@ function displayBurgers() {
 
             console.log(allBurgers);
 
-            console.log(response)
-            console.log(burgerList)
-            
+            console.log(response);
+            console.log(burgerList);
 
-            const eaten = response.data.filter(function (valueObject) {
-                return valueObject.eaten == true
-            })
-
-            console.log("hello 48");
-            console.log(eaten)
-            const eatenBurgersEl = document.getElementById("eaten")
-            const eatenBurgersStr = eaten.map(burger => `<div class="condiment${condimentSelect(burger.id)}">${burger.burgerName}</div>`)
-            const eatenBurgersHTML = eatenBurgersStr.join("<br>")
-            eatenBurgersEl.innerHTML = eatenBurgersHTML
         })
         .catch(function (error) {
             console.log(error);
