@@ -23,28 +23,8 @@ burgerButtonEl.addEventListener("click", function () {
     }
 });
 
-function condimentSelect(burgers){
-    console.log(burgers)
-    if (burgers%2 == 0){
-        if (burgers%4 == 0){
-            return "1"
-        } else {
-            return "2"
-        }
-        
-    }
-    else {
-        if ((--burgers)%4 == 0){
-            return "3"
-        } else {
-            return "4"
-        }
-        
-    }
-}
 
-
-//displays all burgers depending on eaten status
+//displays all burgers depending on devoured status
 
 //Received help from Matt B and referred to his Github
 function displayBurgers() {
@@ -84,7 +64,7 @@ function displayBurgers() {
         });
 }
 
-//update individual db entry from uneaten to eaten and repopulate the uneaten and eaten burger lists
+//update individual db entry from unDevoured to devoured and repopulate the unDevoured and devoured burger lists
 function eatBurger(id) {
     console.log(id)
     axios.put(`/api/burgers/${id}`)
