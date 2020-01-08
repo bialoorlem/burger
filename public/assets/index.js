@@ -59,10 +59,6 @@ function displayBurgers() {
             console.log(response)
             console.log(burgerList)
             
-            const burgerListStr = burgerList.burgers.map(burgers => `<div class="condiment${condimentSelect(burgers.id)}">${burgers.burger_name}<button onclick="eatBurger(${burgers.id}) "id="${burgers.id}" class="eatbutton${condimentSelect(burgers.id)}">&nbsp;Eat This Burger&nbsp;</button></div>`)
-            console.log(burgerListStr)
-            const burgersAndButtonsHTML = burgerListStr.join("<br>")
-            burgerListEl.innerHTML = burgersAndButtonsHTML;
 
             const eaten = response.data.filter(function (valueObject) {
                 return valueObject.eaten == true
