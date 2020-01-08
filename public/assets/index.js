@@ -1,21 +1,5 @@
-//left to do:
-//if user adds burger with no name, error message? or randomly generated burger name?
-
 const burgerInputEl = document.getElementById("burgerName")
 const burgerButtonEl = document.getElementById("addBurger")
-
-//click handler for menu/about block
-const aboutButtonEl = document.getElementById("about-box")
-const fillInDivEl = document.getElementById("fillInDiv")
-const topBarEl = document.getElementById("bar1")
-const midBarEl = document.getElementById("bar2")
-const botBarEl = document.getElementById("bar3")
-aboutButtonEl.addEventListener("click", function (){
-    topBarEl.classList.toggle("bar1clicked")
-    midBarEl.classList.toggle("bar2clicked")
-    botBarEl.classList.toggle("bar3clicked")
-    fillInDivEl.classList.toggle("fill-in-div")
-})
 
 
 //add a burger
@@ -36,20 +20,13 @@ burgerButtonEl.addEventListener("click", function () {
             .catch(function (error) {
                 console.log(error);
             });
-    } else {
-        // case if user doesn't enter a name for new burger
-        burgerInputEl.setAttribute("placeholder", "!!!    Please name your burger    !!!")
-        burgerInputEl.focus();
     }
-})
+});
 
-test = {id: 1, burger_name: "Good Burger", eaten: true}
-
-//function to alternate the class of the div holding each burger name based on the db entry's ID number
-function condimentSelect(burger){
-    console.log(burger)
-    if (burger%2 == 0){
-        if (burger%4 == 0){
+function condimentSelect(burgers){
+    console.log(burgers)
+    if (burgers%2 == 0){
+        if (burgers%4 == 0){
             return "1"
         } else {
             return "2"
@@ -57,7 +34,7 @@ function condimentSelect(burger){
         
     }
     else {
-        if ((--burger)%4 == 0){
+        if ((--burgers)%4 == 0){
             return "3"
         } else {
             return "4"
@@ -71,22 +48,30 @@ function condimentSelect(burger){
 function displayBurgers() {
     axios.get('/api/burgers')
         .then(function (response) {
-            const uneaten = response.data.filter(function (valueObject) {
-                return valueObject.eaten == false
-            })
-            console.log(uneaten)
-            const uneatenBurgersEl = document.getElementById("unEaten")
-            const uneatenBurgersStr = uneaten.map(burger => `<div class="condiment${condimentSelect(burger.id)}">${burger.burger_name}<button onclick="eatBurger(${burger.id}) "id="${burger.id}" class="eatbutton${condimentSelect(burger.id)}">&nbsp;Eat This Burger&nbsp;</button></div>`)
-            console.log(uneatenBurgersStr)
-            const burgersAndButtonsHTML = uneatenBurgersStr.join("<br>")
-            uneatenBurgersEl.innerHTML = burgersAndButtonsHTML;
+
+            const allBurgers = response.data.map(burgers => `<div id="burgerList">${burgers.burger_name}</div><button onclick="eatBurger(${burgers.id})">Devour</button>`);
+            const burgerListEl = document.getElementById("burgerList");
+            const burgerListHTML = allBurgers.join("<br>");
+            burgerListEl.innerHTML = burgerListHTML;
+
+            console.log(allBurgers);
+
+            console.log(response)
+            console.log(burgerList)
+            
+            const burgerListStr = burgerList.burgers.map(burgers => `<div class="condiment${condimentSelect(burgers.id)}">${burgers.burger_name}<button onclick="eatBurger(${burgers.id}) "id="${burgers.id}" class="eatbutton${condimentSelect(burgers.id)}">&nbsp;Eat This Burger&nbsp;</button></div>`)
+            console.log(burgerListStr)
+            const burgersAndButtonsHTML = burgerListStr.join("<br>")
+            burgerListEl.innerHTML = burgersAndButtonsHTML;
 
             const eaten = response.data.filter(function (valueObject) {
                 return valueObject.eaten == true
             })
+
+            console.log("hello 48");
             console.log(eaten)
             const eatenBurgersEl = document.getElementById("eaten")
-            const eatenBurgersStr = eaten.map(burger => `<div class="condiment${condimentSelect(burger.id)}">${burger.burger_name}</div>`)
+            const eatenBurgersStr = eaten.map(burger => `<div class="condiment${condimentSelect(burger.id)}">${burger.burgerName}</div>`)
             const eatenBurgersHTML = eatenBurgersStr.join("<br>")
             eatenBurgersEl.innerHTML = eatenBurgersHTML
         })
