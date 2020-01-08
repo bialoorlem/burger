@@ -45,14 +45,33 @@ function condimentSelect(burgers){
 
 
 //displays all burgers depending on eaten status
+
+//Received help from Matt B and referred to his Github
 function displayBurgers() {
     axios.get('/api/burgers')
         .then(function (response) {
 
-            const allBurgers = response.data.map(burgers => `<div id="burgerList">${burgers.burger_name}</div><button onclick="eatBurger(${burgers.id})">Devour</button>`);
+            const nonDevouredBurgers = response.data.filter(function(value){
+
+                return value.devoured === false;
+
+            });
+
+            const allBurgers = nonDevouredBurgers.map(burgers => `<div id="burgerList">${burgers.burger_name}</div><button onclick="eatBurger(${burgers.id})">Devour</button>`);
             const burgerListEl = document.getElementById("burgerList");
             const burgerListHTML = allBurgers.join("<br>");
             burgerListEl.innerHTML = burgerListHTML;
+
+            const devouredBurgers = response.data.filter(function(value){
+
+                return value.devoured === true;
+
+            });
+
+            const allDevouredBurgers = devouredBurgers.map(burgers => `<div id="burgerList">${burgers.burger_name}</div>`);
+            const devouredBurgersIDEl = document.getElementById("devouredBurgersID");
+            const devouredBurgerHTML = allDevouredBurgers.join("<br>");
+            devouredBurgersIDEl.innerHTML = devouredBurgerHTML;
 
             console.log(allBurgers);
 
